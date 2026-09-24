@@ -65,6 +65,6 @@ public class ChessMove {
 
     @Override
     public String toString() {
-        return this.start.toString() + " => " + this.end.toString();
+        return this.start.toString() + " => " + this.end.toString() + " (" + promoteTo + ")";
     }
 }

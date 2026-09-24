@@ -130,7 +130,26 @@ public class ChessPiece {
                     testPiece = board.getPiece(testPosition);
 
                     if (testPiece == null) {
-                        moveSet.add(new ChessMove(myPosition, testPosition, null));
+                        if ((this.myColor == ChessGame.TeamColor.BLACK && myPosition.getRow() == 2) ||
+                                this.myColor == ChessGame.TeamColor.WHITE && myPosition.getRow() == 7) {
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.QUEEN));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.BISHOP));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.KNIGHT));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.ROOK));
+                        } else {
+                            moveSet.add(new ChessMove(myPosition, testPosition, null));
+                        }
+
+                       if ((this.myColor == ChessGame.TeamColor.BLACK && myPosition.getRow() == 7) ||
+                                this.myColor == ChessGame.TeamColor.WHITE && myPosition.getRow() == 2) {
+                            testRow = testRow + inc;
+                            testPosition = new ChessPosition(testRow, testCol);
+                            testPiece = board.getPiece(testPosition);
+
+                            if (testPiece == null) {
+                                moveSet.add(new ChessMove(myPosition, testPosition, null));
+                            }
+                        }
                     }
                 }
 
@@ -143,8 +162,16 @@ public class ChessPiece {
                     testPosition = new ChessPosition(testRow, testCol);
                     testPiece = board.getPiece(testPosition);
 
-                    if (testPiece == null || testPiece.getTeamColor() != this.myColor) {
-                        moveSet.add(new ChessMove(myPosition, testPosition, null));
+                    if (testPiece != null && testPiece.getTeamColor() != this.myColor) {
+                        if ((this.myColor == ChessGame.TeamColor.BLACK && myPosition.getRow() == 2) ||
+                                this.myColor == ChessGame.TeamColor.WHITE && myPosition.getRow() == 7) {
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.QUEEN));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.BISHOP));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.KNIGHT));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.ROOK));
+                        } else {
+                            moveSet.add(new ChessMove(myPosition, testPosition, null));
+                        }
                     }
                 }
 
@@ -157,10 +184,19 @@ public class ChessPiece {
                     testPosition = new ChessPosition(testRow, testCol);
                     testPiece = board.getPiece(testPosition);
 
-                    if (testPiece == null || testPiece.getTeamColor() != this.myColor) {
-                        moveSet.add(new ChessMove(myPosition, testPosition, null));
+                    if (testPiece != null && testPiece.getTeamColor() != this.myColor) {
+                        if ((this.myColor == ChessGame.TeamColor.BLACK && myPosition.getRow() == 2) ||
+                                this.myColor == ChessGame.TeamColor.WHITE && myPosition.getRow() == 7) {
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.QUEEN));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.BISHOP));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.KNIGHT));
+                            moveSet.add(new ChessMove(myPosition, testPosition, ChessPiece.PieceType.ROOK));
+                        } else {
+                            moveSet.add(new ChessMove(myPosition, testPosition, null));
+                        }
                     }
                 }
+
                 break;
             default:
                 break;
