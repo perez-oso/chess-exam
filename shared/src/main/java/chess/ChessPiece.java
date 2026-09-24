@@ -90,7 +90,7 @@ public class ChessPiece {
                         testPosition = new ChessPosition(testRow, testCol);
                         testPiece = board.getPiece(testPosition);
 
-                        if (testPiece == null || testPiece.myType != this.myType) {
+                        if (testPiece == null || testPiece.getTeamColor() != this.myColor) {
                             moveSet.add(new ChessMove(myPosition, testPosition, null));
                         }
                     }
