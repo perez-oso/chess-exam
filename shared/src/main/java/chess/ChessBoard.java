@@ -9,70 +9,21 @@ import java.util.*;
  * signature of the existing methods.
  */
 public class ChessBoard {
-    ChessPosition myPosition;
-    ChessPiece myPiece;
+    Map<ChessPosition, ChessPiece> board = new HashMap<>() {};
 
-    Map<ChessPosition, ChessPiece> board = new Map<ChessPosition, ChessPiece>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        ChessBoard that = (ChessBoard) o;
+        return Objects.equals(board, that.board);
+    }
 
-        @Override
-        public boolean containsKey(Object key) {
-            return false;
-        }
-
-        @Override
-        public boolean containsValue(Object value) {
-            return false;
-        }
-
-        @Override
-        public ChessPiece get(Object key) {
-            return null;
-        }
-
-        @Override
-        public ChessPiece put(ChessPosition key, ChessPiece value) {
-            return null;
-        }
-
-        @Override
-        public ChessPiece remove(Object key) {
-            return null;
-        }
-
-        @Override
-        public void putAll(Map<? extends ChessPosition, ? extends ChessPiece> m) {
-
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Set<ChessPosition> keySet() {
-            return Set.of();
-        }
-
-        @Override
-        public Collection<ChessPiece> values() {
-            return List.of();
-        }
-
-        @Override
-        public Set<Entry<ChessPosition, ChessPiece>> entrySet() {
-            return Set.of();
-        }
-    };
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(board);
+    }
 
     /**
      * Adds a chess piece to the chessboard
@@ -81,7 +32,7 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        board.put(position, piece);
+        this.board.put(position, piece);
 //        throw new RuntimeException("Not implemented");
 
     }
@@ -95,7 +46,7 @@ public class ChessBoard {
      */
     public ChessPiece getPiece(ChessPosition position) {
 //        throw new RuntimeException("Not implemented");
-        return board.get(position);
+        return this.board.get(position);
     }
 
     /**
@@ -105,5 +56,30 @@ public class ChessBoard {
     public void resetBoard() {
 //        throw new RuntimeException("Not implemented");
         this.board.clear();
+
+        this.board.put(new ChessPosition(8, 1), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        this.board.put(new ChessPosition(8, 8), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
+        this.board.put(new ChessPosition(1, 1), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+        this.board.put(new ChessPosition(1, 8), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+
+        this.board.put(new ChessPosition(8, 2), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        this.board.put(new ChessPosition(8, 7), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
+        this.board.put(new ChessPosition(1, 2), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+        this.board.put(new ChessPosition(1, 7), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
+
+        this.board.put(new ChessPosition(8, 3), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        this.board.put(new ChessPosition(8, 6), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
+        this.board.put(new ChessPosition(1, 3), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+        this.board.put(new ChessPosition(1, 6), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
+
+        this.board.put(new ChessPosition(8, 4), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN));
+        this.board.put(new ChessPosition(8, 5), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING));
+        this.board.put(new ChessPosition(1, 4), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN));
+        this.board.put(new ChessPosition(1, 5), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING));
+
+        for (int currentCol = 1; currentCol <= 8; currentCol++) {
+            this.board.put(new ChessPosition(7, currentCol), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN));
+            this.board.put(new ChessPosition(2, currentCol), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN));
+        }
     }
 }

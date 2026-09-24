@@ -29,8 +29,8 @@ public class ChessPiece {
     ChessPiece.PieceType myType;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
-        myColor = pieceColor;
-        myType = type;
+        this.myColor = pieceColor;
+        this.myType = type;
     }
 
     /**
@@ -50,7 +50,7 @@ public class ChessPiece {
      */
     public ChessGame.TeamColor getTeamColor() {
         //'throw new RuntimeException("Not implemented");
-        return myColor;
+        return this.myColor;
     }
 
     /**
@@ -59,7 +59,7 @@ public class ChessPiece {
     public PieceType getPieceType() {
 
 //        throw new RuntimeException("Not implemented");
-        return myType;
+        return this.myType;
     }
 
     /**
