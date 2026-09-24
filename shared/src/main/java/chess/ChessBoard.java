@@ -9,7 +9,7 @@ import java.util.*;
  * signature of the existing methods.
  */
 public class ChessBoard {
-    Map<ChessPosition, ChessPiece> board = new HashMap<>() {};
+    Map<ChessPosition, ChessPiece> board = new HashMap<ChessPosition, ChessPiece>() {};
 
     @Override
     public boolean equals(Object o) {

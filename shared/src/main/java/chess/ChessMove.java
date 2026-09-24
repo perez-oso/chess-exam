@@ -62,4 +62,9 @@ public class ChessMove {
 //        throw new RuntimeException("Not implemented");
         return this.promoteTo;
     }
+
+    @Override
+    public String toString() {
+        return this.start.toString() + " => " + this.end.toString();
+    }
 }
