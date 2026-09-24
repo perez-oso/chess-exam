@@ -76,15 +76,15 @@ public class ChessPiece {
 
         ChessPosition testPosition;
         ChessPiece testPiece;
+        int testRow, testCol;
 
         switch(this.myType) {
             case ChessPiece.PieceType.KNIGHT:
-                int[][] xyList = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
-                int testRow, testCol;
+                int[][] xyKnight = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
 
                 for (int i = 0; i < 8; i++) {
-                    testRow = myPosition.getRow() + xyList[i][0];
-                    testCol = myPosition.getColumn() + xyList[i][1];
+                    testRow = myPosition.getRow() + xyKnight[i][0];
+                    testCol = myPosition.getColumn() + xyKnight[i][1];
 
                     if (testRow > 0 && testRow < 9 && testCol > 0 && testCol < 9) {
                         testPosition = new ChessPosition(testRow, testCol);
@@ -94,10 +94,72 @@ public class ChessPiece {
                             moveSet.add(new ChessMove(myPosition, testPosition, null));
                         }
                     }
+                }
+                break;
+            case ChessPiece.PieceType.KING:
+                int[][] xyKing = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
 
+                for (int i = 0; i < 8; i++) {
+                    testRow = myPosition.getRow() + xyKing[i][0];
+                    testCol = myPosition.getColumn() + xyKing[i][1];
 
+                    if (testRow > 0 && testRow < 9 && testCol > 0 && testCol < 9) {
+                        testPosition = new ChessPosition(testRow, testCol);
+                        testPiece = board.getPiece(testPosition);
 
+                        if (testPiece == null || testPiece.getTeamColor() != this.myColor) {
+                            moveSet.add(new ChessMove(myPosition, testPosition, null));
+                        }
+                    }
+                }
+                break;
+            case PAWN:
+                int inc = -1;
 
+                if (myColor == ChessGame.TeamColor.WHITE) {
+                    inc = 1;
+                }
+
+                testRow = myPosition.getRow() + inc;
+                testCol = myPosition.getColumn();
+                testPosition = new ChessPosition(testRow, testCol);
+                testPiece = board.getPiece(testPosition);
+
+                if (testRow > 0 && testRow < 9 && testCol > 0 && testCol < 9) {
+                    testPosition = new ChessPosition(testRow, testCol);
+                    testPiece = board.getPiece(testPosition);
+
+                    if (testPiece == null) {
+                        moveSet.add(new ChessMove(myPosition, testPosition, null));
+                    }
+                }
+
+                testRow = myPosition.getRow() + inc;
+                testCol = myPosition.getColumn() - 1;
+                testPosition = new ChessPosition(testRow, testCol);
+                testPiece = board.getPiece(testPosition);
+
+                if (testRow > 0 && testRow < 9 && testCol > 0 && testCol < 9) {
+                    testPosition = new ChessPosition(testRow, testCol);
+                    testPiece = board.getPiece(testPosition);
+
+                    if (testPiece == null || testPiece.getTeamColor() != this.myColor) {
+                        moveSet.add(new ChessMove(myPosition, testPosition, null));
+                    }
+                }
+
+                testRow = myPosition.getRow() + inc;
+                testCol = myPosition.getColumn() + 1;
+                testPosition = new ChessPosition(testRow, testCol);
+                testPiece = board.getPiece(testPosition);
+
+                if (testRow > 0 && testRow < 9 && testCol > 0 && testCol < 9) {
+                    testPosition = new ChessPosition(testRow, testCol);
+                    testPiece = board.getPiece(testPosition);
+
+                    if (testPiece == null || testPiece.getTeamColor() != this.myColor) {
+                        moveSet.add(new ChessMove(myPosition, testPosition, null));
+                    }
                 }
                 break;
             default:
